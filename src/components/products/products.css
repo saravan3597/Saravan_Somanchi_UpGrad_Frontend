@@ -1,0 +1,21 @@
+.productsContainer {
+    max-width: 1000px;
+    padding: 1rem;
+    margin: auto;
+}
+
+.productsContainer .productsHandler {
+    padding: 1rem 0;
+}
+
+.productsContainer .productsToggle {
+    max-width: max-content;
+    margin: auto;
+    margin-bottom: 1rem;
+}
+
+.productsContainer .products {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 20px;
+}
