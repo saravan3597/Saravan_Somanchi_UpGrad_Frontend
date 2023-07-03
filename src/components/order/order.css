@@ -1,0 +1,29 @@
+.orderContainer {
+    width: 786px;
+    margin: auto;
+    padding: 1rem;
+}
+
+.orderConfirmation {
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 2rem 0;
+    max-width: 100%;
+}
+
+.orderConfirmation .leftContainer {
+    border-right: 1px solid black;
+}
+
+.orderConfirmation .rightContainer {
+    padding: 1rem;
+}
+
+.orderConfirmation .productDetailsContainer {
+    width: auto;
+    padding: 0;
+}
+
+.buttons {
+    text-align: center;
+}

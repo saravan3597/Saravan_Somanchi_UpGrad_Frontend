@@ -1,0 +1,39 @@
+.productDetailsContainer {
+    display: flex;
+    width: 786px;
+    height: 350px;
+    margin: auto;
+    padding: 2rem;
+}
+
+.productDetailsContainer .rightContainer,
+.productDetailsContainer .leftContainer {
+    max-height: 100%;
+    padding: 0 1rem;
+}
+
+.productDetailsContainer .rightContainer .content {
+    min-height: 75%;
+}
+
+.productDetailsContainer .rightContainer .title {
+    font-size: 40px;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.productDetailsContainer .rightContainer .category {
+    font-size: 14px;
+    margin-bottom: 0.5rem;
+}
+
+.productDetailsContainer .rightContainer .description {
+    font-size: 15px;
+    margin-bottom: 2rem;
+}
+
+.productDetailsContainer .rightContainer .price {
+    font-size: 25px;
+    margin-bottom: 2rem;
+    color: red;
+}

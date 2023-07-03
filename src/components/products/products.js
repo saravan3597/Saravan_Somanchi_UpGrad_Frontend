@@ -144,6 +144,12 @@ export default class Products extends React.Component {
             });
         };
 
+        const navigateToProductDetailPage = (product) => {
+            const category = categories.find(item => item.id === product.categoryCodeId);
+            product.category = category;
+            localStorage.setItem('upgrad_product', JSON.stringify(product));
+        }
+
         return (
             <>
                 <div className='productsContainer'>
@@ -201,7 +207,7 @@ export default class Products extends React.Component {
                                         </Typography>
                                     </CardContent>
                                     <CardActions>
-                                        <Button size='small' variant='contained' sx={{ backgroundColor: '#3f51b5' }}>Buy</Button>
+                                        <Button size='small' variant='contained' sx={{ backgroundColor: '#3f51b5' }} href='/productDetail' onClick={() => { navigateToProductDetailPage(product) }}>Buy</Button>
                                     </CardActions>
                                 </Card>)
                             })
