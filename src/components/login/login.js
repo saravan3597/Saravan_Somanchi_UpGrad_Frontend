@@ -9,6 +9,8 @@ import '../login/login.css'
 import { Link } from 'react-router-dom';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import { useNavigate } from "react-router-dom";
+import store from '../../store/store';
 
 export default function Login() {
     const [emailAddress, setEmailAddress] = React.useState('');
@@ -18,6 +20,7 @@ export default function Login() {
         setEmailAddress('');
         setPassword('');
     }
+    const navigate = useNavigate();
     const signIn = () => {
         let users = localStorage.getItem('upgrad_eshop_users');
         users = users ? JSON.parse(users) : [];
@@ -27,7 +30,11 @@ export default function Login() {
                 setShowConfirmationSnackbar(true);
                 localStorage.setItem('upgrad_eshop_user', JSON.stringify(presentUser));
                 setTimeout(() => {
-                    window.location.href = '/products';
+                    store.dispatch({
+                        type: 'loginState',
+                        value: true
+                    });
+                    navigate('/products');
                 }, 1000);
             } else {
                 loginFailed();

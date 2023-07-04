@@ -14,7 +14,7 @@ import '../order/order.css';
 const steps = ['Items', 'Select Address', 'Confirm Order'];
 
 export default function Order() {
-  const productDetail = JSON.parse(localStorage.getItem('upgrad_eshop_product'));
+  // const productDetail = JSON.parse(localStorage.getItem('upgrad_eshop_product'));
   const [activeStep, setActiveStep] = React.useState(0);
   const [name, setName] = React.useState('');
   const [contactNumber, setContactNumber] = React.useState('');

@@ -10,62 +10,25 @@ import IconButton from '@mui/material/IconButton';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import store from '../../store/store';
 
 export default class Header extends React.Component {
     constructor() {
         super();
-        const user = localStorage.getItem('upgrad_eshop_user');
         this.state = {
-            loggedIn: user,
+            loggedIn: false,
             isAdmin: false
         };
     }
     render() {
-
-        const Search = styled('div')(({ theme }) => ({
-            position: 'relative',
-            borderRadius: theme.shape.borderRadius,
-            backgroundColor: alpha(theme.palette.common.white, 0.15),
-            '&:hover': {
-                backgroundColor: alpha(theme.palette.common.white, 0.25),
-            },
-            marginLeft: 0,
-            width: '100%',
-            [theme.breakpoints.up('sm')]: {
-                marginLeft: theme.spacing(1),
-                width: 'auto',
-            },
-        }));
-
-        const SearchIconWrapper = styled('div')(({ theme }) => ({
-            padding: theme.spacing(0, 2),
-            height: '100%',
-            position: 'absolute',
-            pointerEvents: 'none',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-        }));
-
-        const StyledInputBase = styled(InputBase)(({ theme }) => ({
-            color: 'inherit',
-            '& .MuiInputBase-input': {
-                padding: theme.spacing(1, 1, 1, 0),
-                paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-                transition: theme.transitions.create('width'),
-                width: '100%',
-                [theme.breakpoints.up('sm')]: {
-                    width: '30ch'
-                },
-            },
-        }));
-
         const LinkStyles = { color: '#FFF', textDecorationColor: '#FFF', cursor: 'pointer' };
-
         const handleRouting = (route) => {
             if (route === 'logout') localStorage.removeItem('upgrad_eshop_user');
         }
-
+        store.subscribe(() => {
+            const storeState = store.getState();
+            this.setState({ loggedIn: storeState.loginState });
+        });
         return (
             <>
                 <Box sx={{ flexGrow: 1 }}>
@@ -83,15 +46,7 @@ export default class Header extends React.Component {
                                 Upgrad E-Shop
                             </Typography>
                             {this.state.loggedIn ? <>
-                                <Search>
-                                    <SearchIconWrapper>
-                                        <SearchIcon />
-                                    </SearchIconWrapper>
-                                    <StyledInputBase
-                                        placeholder="Search…"
-                                        inputProps={{ 'aria-label': 'search' }}
-                                    />
-                                </Search>
+                                <SearchBar></SearchBar>
                                 <Box sx={{ flexGrow: 1 }} />
                             </> : ''}
                             {this.state.loggedIn ? <>
@@ -108,4 +63,64 @@ export default class Header extends React.Component {
             </>
         );
     }
+}
+
+
+function SearchBar() {
+
+    const Search = styled('div')(({ theme }) => ({
+        position: 'relative',
+        borderRadius: theme.shape.borderRadius,
+        backgroundColor: alpha(theme.palette.common.white, 0.15),
+        '&:hover': {
+            backgroundColor: alpha(theme.palette.common.white, 0.25),
+        },
+        marginLeft: 0,
+        width: '100%',
+        [theme.breakpoints.up('sm')]: {
+            marginLeft: theme.spacing(1),
+            width: 'auto',
+        },
+    }));
+
+    const SearchIconWrapper = styled('div')(({ theme }) => ({
+        padding: theme.spacing(0, 2),
+        height: '100%',
+        position: 'absolute',
+        pointerEvents: 'none',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    }));
+
+    const StyledInputBase = styled(InputBase)(({ theme }) => ({
+        color: 'inherit',
+        '& .MuiInputBase-input': {
+            padding: theme.spacing(1, 1, 1, 0),
+            paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+            transition: theme.transitions.create('width'),
+            width: '100%',
+            [theme.breakpoints.up('sm')]: {
+                width: '30ch'
+            },
+        },
+    }));
+
+    const handleSearch = (value) => {
+        store.dispatch({ type: 'searchString', value: value })
+    }
+
+    return (
+        <Search>
+            <SearchIconWrapper>
+                <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ 'aria-label': 'search' }}
+                value={store.searchString}
+                onChange={(e) => handleSearch(e.target.value)}
+            />
+        </Search>
+    )
 }

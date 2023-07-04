@@ -11,7 +11,7 @@ export default function ProductDetail(props) {
         <>
             <div className='productDetailsContainer'>
                 {!props.noImage ? <div className='leftContainer'>
-                    <img src={productDetail.imageSrc} height={300} width={300} />
+                    <img src={productDetail.imageSrc} height={300} width={300} alt="product_image" />
                 </div> : ''}
                 <div className='rightContainer'>
                     <div className='content'>

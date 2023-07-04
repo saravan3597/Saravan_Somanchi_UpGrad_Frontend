@@ -13,6 +13,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Box from '@mui/material/Box';
 import '../products/products.css';
+import store from '../../store/store';
 
 
 const categories = [
@@ -104,6 +105,13 @@ export default class Products extends React.Component {
         }
     }
     render() {
+        store.subscribe(() => {
+            const storeState = store.getState();
+            const searchString = storeState.searchString;
+            let newProductsList = JSON.parse(JSON.stringify(productsList));
+            newProductsList = newProductsList.filter(product => product.name.includes(searchString));
+            this.setState({ productsList: newProductsList });
+        });
         const handleCategoryChange = (event, newCategory) => {
             this.setState({ category: newCategory });
             setTimeout(() => {
@@ -138,7 +146,6 @@ export default class Products extends React.Component {
                             break;
                         }
                     }
-                    console.log(newProductsList);
                     this.setState({ productsList: newProductsList });
                 }
             });
