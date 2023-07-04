@@ -147,7 +147,7 @@ export default class Products extends React.Component {
         const navigateToProductDetailPage = (product) => {
             const category = categories.find(item => item.id === product.categoryCodeId);
             product.category = category;
-            localStorage.setItem('upgrad_product', JSON.stringify(product));
+            localStorage.setItem('upgrad_eshop_product', JSON.stringify(product));
         }
 
         return (

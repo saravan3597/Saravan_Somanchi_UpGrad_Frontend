@@ -14,7 +14,7 @@ export default class Order extends React.Component {
   constructor() {
     super();
     this.state = {
-      productDetail: JSON.parse(localStorage.getItem('upgrad_product_order')),
+      productDetail: JSON.parse(localStorage.getItem('upgrad_eshop_product')),
       activeStep: 2
     }
   }

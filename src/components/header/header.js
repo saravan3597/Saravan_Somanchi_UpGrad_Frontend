@@ -14,9 +14,10 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 export default class Header extends React.Component {
     constructor() {
         super();
+        const user = localStorage.getItem('upgrad_eshop_user');
         this.state = {
-            loggedIn: true,
-            isAdmin: true
+            loggedIn: user,
+            isAdmin: false
         };
     }
     render() {
@@ -61,6 +62,10 @@ export default class Header extends React.Component {
 
         const LinkStyles = { color: '#FFF', textDecorationColor: '#FFF', cursor: 'pointer' };
 
+        const handleRouting = (route) => {
+            if (route === 'logout') localStorage.removeItem('upgrad_eshop_user');
+        }
+
         return (
             <>
                 <Box sx={{ flexGrow: 1 }}>
@@ -90,12 +95,12 @@ export default class Header extends React.Component {
                                 <Box sx={{ flexGrow: 1 }} />
                             </> : ''}
                             {this.state.loggedIn ? <>
-                                <Link href="/products" sx={{ mr: 2, ...LinkStyles }}>Home</Link>
+                                <Link href='/products' sx={{ mr: 2, ...LinkStyles }} onClick={() => handleRouting('products')}>Home</Link>
                                 {this.state.isAdmin ? <Link sx={{ mr: 2, ...LinkStyles }}>Add Product</Link> : ''}
-                                <Button variant='contained' sx={{ backgroundColor: '#f50157' }}>Logout</Button>
+                                <Button href='/' variant='contained' sx={{ backgroundColor: '#f50157' }} onClick={() => handleRouting('login')}>Logout</Button>
                             </> : < >
-                                <Link href="/login" sx={{ mr: 2, ...LinkStyles }}>Login</Link>
-                                <Link href="/signup" sx={LinkStyles}>Signup</Link>
+                                <Link href='/login' sx={{ mr: 2, ...LinkStyles }} onClick={() => handleRouting('login')}>Login</Link>
+                                <Link href='/signup' sx={LinkStyles} onClick={() => handleRouting('signup')}>Signup</Link>
                             </>}
                         </Toolbar>
                     </AppBar>
