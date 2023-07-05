@@ -15,20 +15,17 @@ import store from '../../store/store';
 export default class Header extends React.Component {
     constructor() {
         super();
+        const userData = localStorage.getItem('upgrad_eshop_user');
         this.state = {
-            loggedIn: false,
+            loggedIn: userData,
             isAdmin: false
         };
     }
     render() {
         const LinkStyles = { color: '#FFF', textDecorationColor: '#FFF', cursor: 'pointer' };
         const handleRouting = (route) => {
-            if (route === 'logout') localStorage.removeItem('upgrad_eshop_user');
+            if (route === 'login') localStorage.removeItem('upgrad_eshop_user');
         }
-        store.subscribe(() => {
-            const storeState = store.getState();
-            this.setState({ loggedIn: storeState.loginState });
-        });
         return (
             <>
                 <Box sx={{ flexGrow: 1 }}>

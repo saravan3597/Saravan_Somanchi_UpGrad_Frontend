@@ -109,7 +109,7 @@ export default class Products extends React.Component {
             const storeState = store.getState();
             const searchString = storeState.searchString;
             let newProductsList = JSON.parse(JSON.stringify(productsList));
-            newProductsList = newProductsList.filter(product => product.name.includes(searchString));
+            newProductsList = newProductsList.filter(product => product.name.toUpperCase().includes(searchString.toUpperCase()));
             this.setState({ productsList: newProductsList });
         });
         const handleCategoryChange = (event, newCategory) => {

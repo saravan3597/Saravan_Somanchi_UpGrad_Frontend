@@ -30,11 +30,7 @@ export default function Login() {
                 setShowConfirmationSnackbar(true);
                 localStorage.setItem('upgrad_eshop_user', JSON.stringify(presentUser));
                 setTimeout(() => {
-                    store.dispatch({
-                        type: 'loginState',
-                        value: true
-                    });
-                    navigate('/products');
+                    window.location.href = '/products';
                 }, 1000);
             } else {
                 loginFailed();

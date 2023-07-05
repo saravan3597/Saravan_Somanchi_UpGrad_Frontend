@@ -1,10 +1,9 @@
 import { createStore } from 'redux';
 
 function upgradStateReducer(state = {
-    searchString: '',
-    loginState: false
+    searchString: ''
 }, action) {
-    state[action.type] = action.value;
+    state.searchString = action.value;
     return state;
 }
 
